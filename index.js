@@ -1,3 +1,4 @@
+import './styles/reset.scss'
 const pokeContainer = document.getElementById('container')
 
 const getPokemon = (id) => {
