@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles\\reset.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA","file":"pureJS.e31bb0bc.css","sourceRoot":"..","sourcesContent":["*, *::before, *::after{\r\n  padding: 0;\r\n  margin: 0;\r\n  box-sizing: border-box;\r\n}\r\n"]}
