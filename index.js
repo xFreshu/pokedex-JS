@@ -1,7 +1,6 @@
 import './styles/reset.scss'
-
+import api from "./app/api";
 const pokeContainer = document.getElementById('container');
-const Btn = document.getElementById('paginationNext');
 const colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
@@ -22,6 +21,7 @@ const colors = {
 
 const main_types = Object.keys(colors)
 let res = [];
+
 
 const getPokemon = (id) => {
     const URL = `https://pokeapi.co/api/v2/pokemon/${id}`
