@@ -195,6 +195,25 @@ module.hot.accept(reloadCSS);
 require("./styles/reset.scss");
 
 var pokeContainer = document.getElementById('container');
+var Btn = document.getElementById('paginationNext');
+var colors = {
+  fire: '#FDDFDF',
+  grass: '#DEFDE0',
+  electric: '#FCF7DE',
+  water: '#DEF3FD',
+  ground: '#f4e7da',
+  rock: '#d5d5d4',
+  fairy: '#fceaff',
+  poison: '#98d7a5',
+  bug: '#f8d5a3',
+  dragon: '#97b3e6',
+  psychic: '#eaeda1',
+  flying: '#F5F5F5',
+  fighting: '#E6E0D4',
+  normal: '#F5F5F5'
+};
+var main_types = Object.keys(colors);
+var res = [];
 
 var getPokemon = function getPokemon(id) {
   var URL = "https://pokeapi.co/api/v2/pokemon/".concat(id);
@@ -207,9 +226,18 @@ var getPokemon = function getPokemon(id) {
 
 function createPokemonCard(pokemon) {
   var pokemonEl = document.createElement('div');
+  pokemonEl.classList.add('pokemonCard');
   var pokeInnerHTML;
+  var pokemonIndex = "#".concat(pokemon.id.toString().padStart(3, '0'));
   var name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-  pokeInnerHTML = "".concat(pokemon.id + '. ' + name);
+  var pokeTypes = pokemon.types.map(function (type) {
+    return type.type.name;
+  });
+  var pokeType = main_types.find(function (type) {
+    return pokeTypes.indexOf(type) > -1;
+  });
+  pokeInnerHTML = "\n    <img src=\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/".concat(pokemon.id, ".gif\" alt=\"pokemon gif\" class=\"pokemon__img\">\n    <span class=\"pokemon__index\">").concat(pokemonIndex, "</span>\n    <span class=\"pokemon__name\">").concat(name, "</span>\n    <span class=\"pokemon__type\">Type: ").concat(pokeType, "</span>\n");
+  pokemonEl.style.backgroundColor = colors[pokeType];
   pokemonEl.innerHTML = pokeInnerHTML;
   pokeContainer.appendChild(pokemonEl);
 }
@@ -249,7 +277,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59739" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62515" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
