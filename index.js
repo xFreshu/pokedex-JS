@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import './styles/reset.scss'
 const pokeContainer = document.getElementById('container');
 const colors = {
