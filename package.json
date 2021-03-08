@@ -19,7 +19,8 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.12.13"
+    "@babel/preset-react": "^7.12.13",
+    "app": "^0.1.0"
   },
   "browserslist": [
     "last 3 and_chr versions",

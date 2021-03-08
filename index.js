@@ -1,7 +1,6 @@
-import 'regenerator-runtime/runtime'
 import './styles/reset.scss'
 const pokeContainer = document.getElementById('container');
-const colors = {
+export const colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
     electric: '#FCF7DE',
@@ -17,24 +16,24 @@ const colors = {
     fighting: '#E6E0D4',
     normal: '#F5F5F5'
 };
-
-
 const main_types = Object.keys(colors)
 
+
+//display pokemon by for loop
 const fetchPoke = async () => {
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 20; i++) {
         await getPokemon(i)
     }
 }
-
+//fetch async URL
 const getPokemon = async id => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
     const pokemon = await res.json();
     createPokemonCard(pokemon);
 };
-fetchPoke();
 
+//create a pokemon card
 function createPokemonCard(pokemon) {
     const pokemonEl = document.createElement('div');
     pokemonEl.classList.add('pokemonCard')
@@ -43,7 +42,6 @@ function createPokemonCard(pokemon) {
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
     const pokeTypes = pokemon.types.map(type => type.type.name)
     const pokeType = main_types.find(type => pokeTypes.indexOf(type) > -1)
-
     pokeInnerHTML = `
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif" alt="pokemon gif" class="pokemon__img">
     <span class="pokemon__index">${pokemonIndex}</span>
@@ -52,8 +50,9 @@ function createPokemonCard(pokemon) {
 `;
     pokemonEl.style.backgroundColor = colors[pokeType];
     pokemonEl.innerHTML = pokeInnerHTML;
-
     pokeContainer.appendChild(pokemonEl)
 }
+
+fetchPoke();
 
 
