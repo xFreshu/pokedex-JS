@@ -1,5 +1,4 @@
 import './styles/reset.scss'
-import api from "./app/api";
 const pokeContainer = document.getElementById('container');
 const colors = {
     fire: '#FDDFDF',
@@ -20,16 +19,20 @@ const colors = {
 
 
 const main_types = Object.keys(colors)
-let res = [];
 
-
-const getPokemon = (id) => {
-    const URL = `https://pokeapi.co/api/v2/pokemon/${id}`
-    fetch(URL)
-        .then(res => res.json())
-        .then(res => createPokemonCard(res))
-
+const fetchPoke = async () => {
+    for (let i = 1; i <= 100; i++) {
+        await getPokemon(i)
+    }
 }
+
+const getPokemon = async id => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const res = await fetch(url);
+    const pokemon = await res.json();
+    createPokemonCard(pokemon);
+};
+fetchPoke();
 
 function createPokemonCard(pokemon) {
     const pokemonEl = document.createElement('div');
@@ -52,10 +55,4 @@ function createPokemonCard(pokemon) {
     pokeContainer.appendChild(pokemonEl)
 }
 
-function fetchPoke() {
-    for (let i = 1; i <= 20; i++) {
-        getPokemon(i)
-    }
-}
 
-fetchPoke();
